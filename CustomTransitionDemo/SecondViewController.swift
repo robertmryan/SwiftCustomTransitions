@@ -23,6 +23,7 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         
         let panUp = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
+        panUp.delegate = self
         view.addGestureRecognizer(panUp)
     }
     
@@ -57,4 +58,18 @@ class SecondViewController: UIViewController {
         dismiss(animated: true)
     }
 
+}
+
+extension SecondViewController: UIGestureRecognizerDelegate {
+    
+    // make sure it only recognizes upward gestures
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = pan.translation(in: pan.view)
+            let angle = atan2(translation.y, translation.x)
+            return abs(angle + .pi / 2.0) < (.pi / 8.0)
+        }
+        return false
+    }
 }
