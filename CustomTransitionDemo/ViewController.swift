@@ -36,7 +36,7 @@ class ViewController: UIViewController {
             interactionController = UIPercentDrivenInteractiveTransition()
             controller.customTransitionDelegate.interactionController = interactionController
             
-            show(controller, sender: self)
+            present(controller, animated: true)
         } else if gesture.state == .changed {
             interactionController?.update(percent)
         } else if gesture.state == .ended || gesture.state == .cancelled {
