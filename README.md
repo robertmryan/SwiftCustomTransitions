@@ -5,7 +5,11 @@ This is an demonstration of using custom transitions in Swift 3, including inter
 See WWDC 2013 video [Custom Transitions Using View Controllers.](https://developer.apple.com/videos/wwdc/2013/?id=218), which shows an example of precisely this. For a discussion of presentation controllers, see WWDC 2014 videos [View Controller Advancements in iOS 8](https://developer.apple.com/videos/wwdc/2014/?id=214) and [A Look Inside Presentation Controllers](https://developer.apple.com/videos/wwdc/2014/?id=228). This is a Swift 3 implementation.
 
 
-Developed in Swift 3 on Xcode 8.2.1 for iOS 10. But, the basic ideas are equally applicable for different versions of Swift and/or Objective-C. 
+![example image](https://i.stack.imgur.com/gjrav.gif)
+
+See http://stackoverflow.com/a/42213998/1271826.
+
+This was developed in Swift 3 on Xcode 8.2.1 for iOS 10. But, the basic ideas are equally applicable for different versions of Swift and/or Objective-C. The use of presentation controller requires iOS 8 or later.
 
 ## License
 
