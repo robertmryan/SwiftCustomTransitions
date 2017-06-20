@@ -324,6 +324,7 @@
 				8373936B1E52361B00E3EDB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
