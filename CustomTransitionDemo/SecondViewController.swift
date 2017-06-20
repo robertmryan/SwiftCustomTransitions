@@ -31,7 +31,7 @@ class SecondViewController: UIViewController {
     
     var interactionController: UIPercentDrivenInteractiveTransition?
     
-    func handleGesture(_ gesture: UIPanGestureRecognizer) {
+    @objc func handleGesture(_ gesture: UIPanGestureRecognizer) {
         let translate = gesture.translation(in: gesture.view)
         let percent   = -translate.y / gesture.view!.bounds.size.height
         
