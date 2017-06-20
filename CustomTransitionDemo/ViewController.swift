@@ -41,6 +41,7 @@ class ViewController: UIViewController {
             interactionController?.update(percent)
         } else if gesture.state == .ended || gesture.state == .cancelled {
             let velocity = gesture.velocity(in: gesture.view)
+            interactionController?.completionSpeed = 0.999  // https://stackoverflow.com/a/42972283/1271826
             if (percent > 0.5 && velocity.y == 0) || velocity.y > 0 {
                 interactionController?.finish()
             } else {
