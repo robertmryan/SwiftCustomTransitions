@@ -25,8 +25,8 @@ class PullDownAnimationController: NSObject, UIViewControllerAnimatedTransitioni
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let inView   = transitionContext.containerView
-        let toView   = transitionContext.view(forKey: .to)!
-        let fromView = transitionContext.view(forKey: .from)!
+        let toView   = transitionContext.viewController(forKey: .to)!.view!
+        let fromView = transitionContext.viewController(forKey: .from)!.view!
         
         var frame = inView.bounds
         
@@ -43,7 +43,6 @@ class PullDownAnimationController: NSObject, UIViewControllerAnimatedTransitioni
             })
         case .dismissing:
             toView.frame = frame
-            inView.insertSubview(toView, belowSubview: fromView)
             
             UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
                 frame.origin.y = -frame.size.height

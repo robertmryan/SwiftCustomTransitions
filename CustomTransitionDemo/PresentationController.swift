@@ -9,5 +9,5 @@
 import UIKit
 
 class PresentationController: UIPresentationController {
-    override var shouldRemovePresentersView: Bool { return true }
+    override var shouldRemovePresentersView: Bool { return false }
 }
