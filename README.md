@@ -9,7 +9,7 @@ This branch does a swipe from right edge to animate the presentation of a view o
 - Leaves the presenting view (so we can see it under the presented view controller); and
 - Manages the chrome associated with a "dimming view" to dim the presenting view (so it makes it clear you're interacting with the new view controller on the right).
 
-![example image](http://i.imgur.com/xTm8i22.gif)
+![example image](http://i.imgur.com/bpRGMZt.gif)
 
 See http://stackoverflow.com/a/42213998/1271826.
 
