@@ -13,7 +13,7 @@ This branch does a swipe from right edge to animate the presentation of a view o
 
 See http://stackoverflow.com/a/42213998/1271826.
 
-This was developed in Swift 3 on Xcode 8.2.1 for iOS 10. But, the basic ideas are equally applicable for different versions of Swift and/or Objective-C. The use of presentation controller requires iOS 8 or later.
+This was developed in Swift 3 on Xcode 8.3.3 for iOS 10.3.1. But, the basic ideas are equally applicable for different versions of Swift and/or Objective-C. The use of presentation controller requires iOS 8 or later.
 
 ## License
 
