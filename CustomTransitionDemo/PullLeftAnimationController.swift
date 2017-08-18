@@ -1,5 +1,5 @@
 //
-//  PullDownAnimationController.swift
+//  PullLeftAnimationController.swift
 //  CustomTransitionDemo
 //
 //  Created by Robert Ryan on 2/13/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PullDownAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+class PullLeftAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     
     enum TransitionType {
         case presenting
@@ -25,29 +25,30 @@ class PullDownAnimationController: NSObject, UIViewControllerAnimatedTransitioni
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let inView   = transitionContext.containerView
-        let toView   = transitionContext.view(forKey: .to)!
-        let fromView = transitionContext.view(forKey: .from)!
+        let toView   = transitionContext.viewController(forKey: .to)!.view!
+        let fromView = transitionContext.viewController(forKey: .from)!.view!
         
-        var frame = inView.bounds
+        let frame = inView.bounds
         
+        var offToRight = frame
+        offToRight.origin.x += frame.size.width
+        offToRight.size.width *= 0.8
+
         switch transitionType {
         case .presenting:
-            frame.origin.y = -frame.size.height
-            toView.frame = frame
+            toView.frame = offToRight
             
             inView.addSubview(toView)
             UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-                toView.frame = inView.bounds
+                var onScreen = offToRight
+                onScreen.origin.x -= offToRight.size.width
+                toView.frame = onScreen
             }, completion: { finished in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })
         case .dismissing:
-            toView.frame = frame
-            inView.insertSubview(toView, belowSubview: fromView)
-            
             UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-                frame.origin.y = -frame.size.height
-                fromView.frame = frame
+                fromView.frame = offToRight
             }, completion: { finished in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })

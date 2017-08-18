@@ -13,9 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let panDown = UIPanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
-        panDown.delegate = self
-        view.addGestureRecognizer(panDown)
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleGesture(_:)))
+        gesture.edges = .right
+        view.addGestureRecognizer(gesture)
     }
     
     var interactionController: UIPercentDrivenInteractiveTransition?
@@ -24,14 +24,9 @@ class ViewController: UIViewController {
     
     @objc func handleGesture(_ gesture: UIPanGestureRecognizer) {
         let translate = gesture.translation(in: gesture.view)
-        let percent   = translate.y / gesture.view!.bounds.size.height
+        let percent   = -translate.x / gesture.view!.bounds.size.width
         
-        if gesture.state == .possible {
-            if translate != .zero {
-                let angle = atan2(translate.y, translate.x)
-                print(angle)
-            }
-        } else if gesture.state == .began {
+        if gesture.state == .began {
             let controller = storyboard!.instantiateViewController(withIdentifier: "SecondViewController") as! SecondViewController
             interactionController = UIPercentDrivenInteractiveTransition()
             controller.customTransitionDelegate.interactionController = interactionController
@@ -42,7 +37,7 @@ class ViewController: UIViewController {
         } else if gesture.state == .ended || gesture.state == .cancelled {
             let velocity = gesture.velocity(in: gesture.view)
             interactionController?.completionSpeed = 0.999  // https://stackoverflow.com/a/42972283/1271826
-            if (percent > 0.5 && velocity.y == 0) || velocity.y > 0 {
+            if (percent > 0.5 && velocity.x <= 0) || velocity.x < 0 {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()
@@ -53,17 +48,3 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UIGestureRecognizerDelegate {
-    
-    // make sure it only recognizes downward gestures
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = pan.translation(in: pan.view)
-            let angle = atan2(translation.y, translation.x)
-            return abs(angle - .pi / 2.0) < (.pi / 8.0)
-        }
-        return false
-    }
-
-}

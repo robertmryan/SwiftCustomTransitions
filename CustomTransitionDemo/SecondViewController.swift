@@ -33,7 +33,7 @@ class SecondViewController: UIViewController {
     
     @objc func handleGesture(_ gesture: UIPanGestureRecognizer) {
         let translate = gesture.translation(in: gesture.view)
-        let percent   = -translate.y / gesture.view!.bounds.size.height
+        let percent   = translate.x / gesture.view!.bounds.size.height
         
         if gesture.state == .began {
             interactionController = UIPercentDrivenInteractiveTransition()
@@ -45,7 +45,7 @@ class SecondViewController: UIViewController {
         } else if gesture.state == .ended {
             let velocity = gesture.velocity(in: gesture.view)
             interactionController?.completionSpeed = 0.999  // https://stackoverflow.com/a/42972283/1271826
-            if (percent > 0.5 && velocity.y == 0) || velocity.y < 0 {
+            if (percent > 0.5 && velocity.x >= 0) || velocity.x > 0 {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()
@@ -68,8 +68,8 @@ extension SecondViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let pan = gestureRecognizer as? UIPanGestureRecognizer {
             let translation = pan.translation(in: pan.view)
-            let angle = atan2(translation.y, translation.x)
-            return abs(angle + .pi / 2.0) < (.pi / 8.0)
+            let angle = abs(atan2(translation.x, translation.y) - .pi / 2)
+            return angle < .pi / 8.0
         }
         return false
     }

@@ -20,11 +20,11 @@ class TransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     weak var interactionController: UIPercentDrivenInteractiveTransition?
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PullDownAnimationController(transitionType: .presenting)
+        return PullLeftAnimationController(transitionType: .presenting)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PullDownAnimationController(transitionType: .dismissing)
+        return PullLeftAnimationController(transitionType: .dismissing)
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
